@@ -1,4 +1,4 @@
-﻿#include <fstream>
+#include <fstream>
 #include <iostream>
 #include <ctime>
 
@@ -110,18 +110,19 @@ struct tuple
  }
 
 
+
 int main(int argc, char* argv[])
 {
-    std::ifstream inFile("C:\\Users\\Александр\\github-classroom\\amcp-pit\\task5-radix-sort-AlexanderMenkeev\\tests\\in\\input7.txt", std::ios::binary);
+    std::ifstream inFile(argv[1], std::ios::binary);
 	if (!inFile){ return -2; }
-	std::ofstream outFile("C:\\Users\\Александр\\github-classroom\\amcp-pit\\task5-radix-sort-AlexanderMenkeev\\tests\\out\\output7.txt");
+	std::ofstream outFile(argv[2]);
 	if (!outFile){ return -3; }
 
 	int N, M, K;
 	inFile >> N >> M >> K;
 
 	int b = inFile.tellg();
-	b += 2;
+	b++;
 
 	char* a = new char[N + 1];
 	a[N] = '\0';
@@ -132,7 +133,7 @@ int main(int argc, char* argv[])
 
 	for (int j = 0; j < K; j++)
 	{
-		int pos = b + (M - j - 1) * (N + 2);
+		int pos = b + (M - j - 1) * (N + 1);
 		inFile.seekg(pos);
 		for (int i = 0; i < N; i++)
 		{
@@ -155,8 +156,7 @@ int main(int argc, char* argv[])
      	if (i != N - 1)
      		outFile << " ";
      }
-
-    delete[] arr;
+	 delete[] arr;
 	std::cout << "Time: " << clock() << std::endl;
 	inFile.close();
 	outFile.close();
